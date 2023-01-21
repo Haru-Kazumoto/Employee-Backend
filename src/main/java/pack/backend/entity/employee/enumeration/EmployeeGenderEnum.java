@@ -1,4 +1,4 @@
-package pack.backend.entity.enumeration;
+package pack.backend.entity.employee.enumeration;
 
 public enum EmployeeGenderEnum {
     MALE, FEMALE

@@ -3,16 +3,12 @@ package pack.backend.employeeControllerTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import pack.backend.entity.employee.EmployeeEntity;
-import pack.backend.entity.enumeration.EmployeeGenderEnum;
-import pack.backend.entity.enumeration.EmployeeJobRoleEnum;
+import pack.backend.entity.employee.enumeration.EmployeeGenderEnum;
+import pack.backend.entity.employee.enumeration.EmployeeJobRoleEnum;
 import pack.backend.service.employee.EmployeeService;
 
-import java.util.function.BooleanSupplier;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.mock;
 

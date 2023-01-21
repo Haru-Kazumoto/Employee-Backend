@@ -1,4 +1,4 @@
-package pack.backend.entity.enumeration;
+package pack.backend.entity.employee.enumeration;
 
 public enum EmployeeJobRoleEnum {
     FRONTEND, BACKEND, UI, UX, MOBILE

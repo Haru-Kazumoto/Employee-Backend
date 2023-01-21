@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import pack.backend.entity.enumeration.EmployeeGenderEnum;
-import pack.backend.entity.enumeration.EmployeeJobRoleEnum;
+import pack.backend.entity.employee.enumeration.EmployeeGenderEnum;
+import pack.backend.entity.employee.enumeration.EmployeeJobRoleEnum;
 
 @Getter
 @Setter

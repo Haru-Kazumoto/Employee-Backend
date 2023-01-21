@@ -2,8 +2,8 @@ package pack.backend.entity.employee;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pack.backend.entity.enumeration.EmployeeGenderEnum;
-import pack.backend.entity.enumeration.EmployeeJobRoleEnum;
+import pack.backend.entity.employee.enumeration.EmployeeGenderEnum;
+import pack.backend.entity.employee.enumeration.EmployeeJobRoleEnum;
 
 import java.io.Serializable;
 import java.util.Date;
