@@ -32,7 +32,11 @@ public class WebSecurityConfig {
                 .disable()
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/user-data/register").permitAll();
-                    auth.anyRequest().authenticated();
+                    try {
+                        auth.anyRequest().fullyAuthenticated().and().httpBasic();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }).build();
     }
 
