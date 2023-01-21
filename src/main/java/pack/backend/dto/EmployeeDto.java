@@ -12,10 +12,8 @@ import pack.backend.entity.employee.enumeration.EmployeeJobRoleEnum;
 @Setter
 public class EmployeeDto {
 
-    @NotEmpty(message = "First name is required.")
-    private String firstName;
-
-    private String lastName;
+    @NotEmpty(message = "Name is required.")
+    private String name;
 
     @Email(message = "Email pattern doesn't valid.")
     private String email;

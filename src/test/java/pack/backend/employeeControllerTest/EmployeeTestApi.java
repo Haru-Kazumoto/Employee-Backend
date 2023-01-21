@@ -22,8 +22,7 @@ public class EmployeeTestApi {
     void isValidationForEmployeeClassTrue() {
         EmployeeEntity entity = new EmployeeEntity();
         entity.setId(1);
-        entity.setFirstName("Haru");
-        entity.setLastName("Kazumoto");
+        entity.setName("Haru Kazumoto");
         entity.setEmail("HaruKazumoto@gmail.com");
         entity.setGender(EmployeeGenderEnum.MALE);
         entity.setJobRole(EmployeeJobRoleEnum.BACKEND);

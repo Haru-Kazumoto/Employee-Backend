@@ -21,9 +21,7 @@ public class EmployeeEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 
     @Column(unique = true, nullable = false)
     private String email;
