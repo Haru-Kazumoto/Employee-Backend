@@ -5,6 +5,8 @@ import pack.backend.entity.employee.EmployeeEntity;
 import java.util.List;
 
 public interface EmployeeService {
-    EmployeeEntity createEmployee(EmployeeEntity employee);
+    EmployeeEntity createNewEmployee(EmployeeEntity employee);
     List<EmployeeEntity> getAllEmployee();
+
+    //TODO : find by email employee and employee name.
 }

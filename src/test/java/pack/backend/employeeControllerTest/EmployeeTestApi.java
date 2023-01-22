@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import pack.backend.entity.employee.EmployeeEntity;
 import pack.backend.entity.employee.enumeration.EmployeeGenderEnum;
 import pack.backend.entity.employee.enumeration.EmployeeJobRoleEnum;
-import pack.backend.service.employee.EmployeeService;
+import pack.backend.service.employee.EmployeeServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 public class EmployeeTestApi {
 
     @Mock
-    EmployeeService employeeService = mock(EmployeeService.class);
+    EmployeeServiceImpl employeeService = mock(EmployeeServiceImpl.class);
 
     @Test
     void isValidationForEmployeeClassTrue() {
@@ -27,7 +27,7 @@ public class EmployeeTestApi {
         entity.setGender(EmployeeGenderEnum.MALE);
         entity.setJobRole(EmployeeJobRoleEnum.BACKEND);
 
-        assertThat(employeeService.createEmployee(entity));
+        assertThat(employeeService.createNewEmployee(entity));
 //        assertEquals(HttpStatus.valueOf(200), employeeService.createEmployee(entity));
     }
 }

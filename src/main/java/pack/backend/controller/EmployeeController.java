@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pack.backend.dto.EmployeeDto;
 import pack.backend.dto.ResponseData;
 import pack.backend.entity.employee.EmployeeEntity;
@@ -48,8 +45,13 @@ public class EmployeeController {
         EmployeeEntity employee = modelMapper.map(employeeDto, EmployeeEntity.class);
 
         responseData.setStatus(true);
-        responseData.setPayload(service.createEmployee(employee));
+        responseData.setPayload(service.createNewEmployee(employee));
 
         return ResponseEntity.status(HttpStatus.OK).body(responseData);
+    }
+
+    @GetMapping(path = "/get-all-employees")
+    public ResponseEntity<Iterable<EmployeeEntity>> getAllEmployee(){
+        return ResponseEntity.status(HttpStatus.OK).body(service.getAllEmployee());
     }
 }

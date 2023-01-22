@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import pack.backend.entity.user.UserEntity;
 import pack.backend.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
@@ -43,5 +45,10 @@ public class UserService implements UserDetailsService {
         return repository.save(user);
     }
 
+    public List<UserEntity> getAllUser(){
+        return repository.findAll();
+    }
+
+    //TODO: Find by email user, find by user name
 
 }

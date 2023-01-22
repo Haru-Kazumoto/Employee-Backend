@@ -6,5 +6,5 @@ import pack.backend.entity.employee.EmployeeEntity;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer> {
-    EmployeeEntity findByEmail(String email);
+//    EmployeeEntity findByEmail(String email);
 }
