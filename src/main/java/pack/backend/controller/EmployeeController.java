@@ -10,8 +10,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import pack.backend.dto.EmployeeDto;
 import pack.backend.dto.ResponseData;
+import pack.backend.dto.SearchData;
 import pack.backend.entity.employee.EmployeeEntity;
 import pack.backend.service.employee.EmployeeService;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/employee-data")
@@ -53,5 +56,10 @@ public class EmployeeController {
     @GetMapping(path = "/get-all-employees")
     public ResponseEntity<Iterable<EmployeeEntity>> getAllEmployee(){
         return ResponseEntity.status(HttpStatus.OK).body(service.getAllEmployee());
+    }
+
+    @GetMapping(path = "/get-employee-by-email")
+    public ResponseEntity<Optional<EmployeeEntity>> findEmployeeByEmail(@RequestBody SearchData searchData){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findEmployeeByEmail(searchData.getSearchKey()));
     }
 }
