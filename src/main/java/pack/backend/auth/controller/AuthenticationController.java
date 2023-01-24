@@ -1,11 +1,11 @@
-package pack.backend.controller;
+package pack.backend.auth.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pack.backend.auth.AuthenticationRequest;
 import pack.backend.auth.AuthenticationResponse;
-import pack.backend.auth.AuthenticationService;
+import pack.backend.auth.service.AuthenticationService;
 import pack.backend.auth.RegisterRequest;
 
 @RestController

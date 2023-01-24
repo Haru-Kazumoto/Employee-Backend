@@ -1,12 +1,13 @@
-package pack.backend.auth;
+package pack.backend.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pack.backend.auth.AuthenticationRequest;
+import pack.backend.auth.AuthenticationResponse;
+import pack.backend.auth.RegisterRequest;
 import pack.backend.entity.user.UserEntity;
 import pack.backend.repository.UserRepository;
 import pack.backend.security.jwt.JwtService;
@@ -20,12 +21,13 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = User.builder()
-                .username(request.getEmail())
+        var user = UserEntity.builder()
+                .username(request.getUsername())
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .roles(String.valueOf(request.getRole()))
+                .role(request.getRole())
                 .build();
-        //Todo : Add save repository for user entity
+        repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
