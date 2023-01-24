@@ -62,4 +62,31 @@ public class EmployeeController {
     public ResponseEntity<Optional<EmployeeEntity>> findEmployeeByEmail(@RequestBody SearchData searchData){
         return ResponseEntity.status(HttpStatus.OK).body(service.findEmployeeByEmail(searchData.getSearchKey()));
     }
+
+    @PutMapping(path = "/update-employee")
+    public ResponseEntity<ResponseData<EmployeeEntity>> updateEmployee(
+            @Valid
+            @RequestBody EmployeeEntity employeeEntity,
+            Errors errors){
+        if(errors.hasErrors()){
+            for (ObjectError error : errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+
+        responseData.setStatus(true);
+        responseData.setPayload(service.updateEmployee(employeeEntity));
+
+        return ResponseEntity.status(200).body(responseData);
+    }
+
+    @DeleteMapping(path = "/delete-employee/{id}")
+    public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") Integer id){
+        service.deleteEmployeeById(id);
+        return ResponseEntity.status(200).body(String.format("Employee with id %d has deleted", id));
+    }
 }
