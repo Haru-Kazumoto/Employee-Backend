@@ -1,4 +1,4 @@
-package pack.backend.controller;
+package pack.backend.controller.employee;
 
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;

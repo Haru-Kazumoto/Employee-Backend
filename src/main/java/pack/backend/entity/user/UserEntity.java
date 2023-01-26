@@ -1,6 +1,8 @@
 package pack.backend.entity.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,16 +26,21 @@ public class UserEntity implements UserDetails {
     private Integer id;
 
     @Column(nullable = false)
+    @NotEmpty(message = "Username is required.")
     private String username;
 
     @Column(nullable = false, unique = true)
+    @Email(message = "Email pattern doesn't valid")
+    @NotEmpty(message = "Email should not empty")
     private String email;
 
     @Column(nullable = false)
+    @NotEmpty(message = "Password is important")
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @NotEmpty(message = "Role user is required.")
     private UserRoleEnum role;
 
     @Override
