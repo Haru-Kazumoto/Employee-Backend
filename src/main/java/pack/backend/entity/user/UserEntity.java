@@ -40,7 +40,7 @@ public class UserEntity implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @NotEmpty(message = "Role user is required.")
+    @NotEmpty(message = "Role user is required")
     private UserRoleEnum role;
 
     @Override
