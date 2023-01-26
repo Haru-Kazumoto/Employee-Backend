@@ -6,14 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import pack.backend.pipe.ValidationPipe;
 import pack.backend.dto.EmployeeDto;
+import pack.backend.dto.EnumSearchData;
 import pack.backend.dto.ResponseData;
 import pack.backend.dto.SearchData;
 import pack.backend.entity.employee.EmployeeEntity;
 import pack.backend.service.employee.EmployeeService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,12 +24,14 @@ public class EmployeeController {
 
     private final EmployeeService service;
     private final ModelMapper modelMapper;
+    private final ValidationPipe validationPipe;
     protected ResponseData<EmployeeEntity> responseData = new ResponseData<>();
 
     @Autowired
-    public EmployeeController(EmployeeService service, ModelMapper modelMapper) {
+    public EmployeeController(EmployeeService service, ModelMapper modelMapper, ValidationPipe validationPipe) {
         this.service = service;
         this.modelMapper = modelMapper;
+        this.validationPipe = validationPipe;
     }
 
     @PostMapping(path = "/create")
@@ -35,15 +39,8 @@ public class EmployeeController {
             @Valid
             @RequestBody EmployeeDto employeeDto,
             Errors errors){
-        if(errors.hasErrors()){
-            for (ObjectError error : errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-        }
+        if (validationPipe.validation(errors, responseData)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
 
         EmployeeEntity employee = modelMapper.map(employeeDto, EmployeeEntity.class);
 
@@ -63,20 +60,19 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(service.findEmployeeByEmail(searchData.getSearchKey()));
     }
 
+    @GetMapping(path = "/get-employee-by-role")
+    public ResponseEntity<List<EmployeeEntity>> findEmployeeByJobRole(
+            @Valid
+            @RequestBody EnumSearchData enumSearchData){
+        return ResponseEntity.status(200).body(service.findEmployeeByRole(enumSearchData.getRoleEnum()));
+    }
+
     @PutMapping(path = "/update-employee")
     public ResponseEntity<ResponseData<EmployeeEntity>> updateEmployee(
             @Valid
             @RequestBody EmployeeEntity employeeEntity,
             Errors errors){
-        if(errors.hasErrors()){
-            for (ObjectError error : errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-        }
+        if (validationPipe.validation(errors, responseData)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
 
         responseData.setStatus(true);
         responseData.setPayload(service.updateEmployee(employeeEntity));

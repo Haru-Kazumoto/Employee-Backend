@@ -1,4 +1,4 @@
-package pack.backend.dto;
+package pack.backend.dto.user.dto;
 
 import pack.backend.entity.user.enumeration.UserRoleEnum;
 

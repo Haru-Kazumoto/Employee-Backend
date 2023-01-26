@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pack.backend.entity.employee.EmployeeEntity;
+import pack.backend.entity.employee.enumeration.EmployeeJobRoleEnum;
 import pack.backend.repository.EmployeeRepository;
 
 import java.util.List;
@@ -39,11 +40,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Optional<EmployeeEntity> findEmployeeByEmail(String email) {
-        Optional<EmployeeEntity> emailEmployee = repository.findByEmail(email);
-        if(emailEmployee.isEmpty() || emailEmployee.equals("")){
-            return Optional.empty();
-        }
         return repository.findByEmail(email);
+    }
+
+    @Override
+    public List<EmployeeEntity> findEmployeeByRole(EmployeeJobRoleEnum role) {
+        return repository.findByJobRole(role);
     }
 
     @Override

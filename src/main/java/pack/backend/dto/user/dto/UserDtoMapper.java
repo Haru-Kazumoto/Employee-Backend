@@ -1,4 +1,4 @@
-package pack.backend.dto;
+package pack.backend.dto.user.dto;
 
 import org.springframework.stereotype.Service;
 import pack.backend.entity.user.UserEntity;

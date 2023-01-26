@@ -3,7 +3,7 @@ package pack.backend.controller.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pack.backend.dto.ResponseUserDataDTO;
+import pack.backend.dto.user.dto.ResponseUserDataDTO;
 import pack.backend.service.employee.user.UserService;
 
 import java.util.List;

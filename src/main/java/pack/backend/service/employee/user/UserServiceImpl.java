@@ -3,8 +3,8 @@ package pack.backend.service.employee.user;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pack.backend.dto.ResponseUserDataDTO;
-import pack.backend.dto.UserDtoMapper;
+import pack.backend.dto.user.dto.ResponseUserDataDTO;
+import pack.backend.dto.user.dto.UserDtoMapper;
 import pack.backend.entity.user.UserEntity;
 import pack.backend.repository.UserRepository;
 

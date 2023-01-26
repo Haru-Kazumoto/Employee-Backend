@@ -1,6 +1,6 @@
 package pack.backend.service.employee.user;
 
-import pack.backend.dto.ResponseUserDataDTO;
+import pack.backend.dto.user.dto.ResponseUserDataDTO;
 
 import java.util.List;
 
