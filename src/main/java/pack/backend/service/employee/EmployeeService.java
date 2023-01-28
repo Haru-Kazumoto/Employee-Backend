@@ -13,4 +13,5 @@ public interface EmployeeService {
     List<EmployeeEntity> findEmployeeByRole(EmployeeJobRoleEnum role);
     EmployeeEntity updateEmployee(EmployeeEntity employee);
     void deleteEmployeeById(Integer id);
+
 }
