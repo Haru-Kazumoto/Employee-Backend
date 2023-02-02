@@ -39,8 +39,6 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    @NotEmpty(message = "Role user is required")
     private UserRoleEnum role;
 
     @Override
@@ -55,6 +53,10 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
         return email;
     }
 

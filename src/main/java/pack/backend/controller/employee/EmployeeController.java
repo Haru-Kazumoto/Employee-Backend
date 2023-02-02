@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/employee-data")
+@CrossOrigin(origins = "http://localhost:3000")
 public class EmployeeController {
 
     private final EmployeeService service;

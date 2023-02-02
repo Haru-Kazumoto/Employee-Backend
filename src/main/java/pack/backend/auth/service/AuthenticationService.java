@@ -3,49 +3,62 @@ package pack.backend.auth.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pack.backend.auth.AuthenticationRequest;
-import pack.backend.auth.AuthenticationResponse;
-import pack.backend.auth.RegisterRequest;
 import pack.backend.entity.user.UserEntity;
 import pack.backend.repository.UserRepository;
-import pack.backend.security.jwt.JwtService;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepository repository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
-        var user = UserEntity.builder()
+    private final UserRepository repository;
+    private final AuthenticationManager authenticationManager;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+//    public AuthenticationResponse register(RegisterRequest request) {
+//        var user = UserEntity.builder()
+//                .username(request.getUsername())
+//                .email(request.getEmail())
+//                .password(passwordEncoder.encode(request.getPassword()))
+//                .role(request.getRole())
+//                .build();
+//        repository.save(user);
+//        var jwtToken = jwtService.generateToken(user);
+//        return AuthenticationResponse.builder()
+//                .token(jwtToken)
+//                .build();
+//    }
+
+    public UserEntity register(UserEntity request){
+        var newUser = UserEntity.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-        repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        return repository.save(newUser);
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    /**
+     * If the authenticate want to add jwt,
+     * use AuthenticationResponse instead UserEntity
+     *
+     * @param request
+     */
+    public void authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
+        repository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+//        var jwtToken = jwtService.generateToken(user);
+//        return AuthenticationResponse.builder()
+//                .token(jwtToken)
+//                .build();
     }
 }
